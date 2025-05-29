@@ -13,21 +13,12 @@
       overflow: hidden;
     }
 
-   .container {
-  display: flex;
-  height: 100vh;
-  width: 100vw;
-  align-items: flex-start; /* keep things aligned to top */
-}
-    
-    .insta-widget-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 75%;
-  padding: 1rem;
-  box-sizing: border-box;
-}
+    .container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      align-items: flex-start;
+    }
 
     .video-section {
       flex: 3;
@@ -35,35 +26,52 @@
       justify-content: flex-start;
       align-items: flex-start;
     }
-  .event-image {
-    width: 25%;
-    height: 700px;
-    object-fit: cover;
-  }
 
- .side-panel-wrapper {
-  width: 25%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  background-color: transparent; /* lets blue background show */
-}
+    .event-image {
+      width: 25%;
+      height: 625px;
+      object-fit: cover;
+    }
 
-.side-panel {
-  width: 100%;
-  height: 700px; /* control height */
-  background-color: #B5B5B5;
-  color: #004C77;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 2rem;
-  justify-content: flex-start;
-  gap: 1rem;
-  box-sizing: border-box;
-}
+    .insta-widget-wrapper {
+      width: 75%;
+      height: 625px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+    }
 
+    .lightwidget-widget {
+      width: 550px;
+      height: 550px;
+      border: 0;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .side-panel-wrapper {
+      width: 25%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background-color: transparent;
+    }
+
+    .side-panel {
+      width: 100%;
+      height: 625px;
+      background-color: #B5B5B5;
+      color: #004C77;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      justify-content: flex-start;
+      gap: 1rem;
+      box-sizing: border-box;
+    }
 
     .jackpot {
       font-size: 3rem;
@@ -103,38 +111,39 @@
       vertical-align: middle;
     }
 
-  @keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="video-section">
       <img src="images/JF-Promo5.jpg" alt="Jackfish Promo" class="event-image" />
-   <!-- LightWidget WIDGET -->
-<div class="insta-widget-wrapper">
-  <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
-  <iframe 
-    src="https://cdn.lightwidget.com/widgets/c36c449fd293599688ada4b153a2eb9a.html" 
-    scrolling="no" 
-    allowtransparency="true" 
-    class="lightwidget-widget"
-    style="width:500px; height:500px; border:0; overflow:hidden; border-radius: 8px;">
-  </iframe>
-</div>
+      
+      <!-- LightWidget Instagram Feed -->
+      <div class="insta-widget-wrapper">
+        <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+        <iframe 
+          src="https://cdn.lightwidget.com/widgets/c36c449fd293599688ada4b153a2eb9a.html" 
+          scrolling="no" 
+          allowtransparency="true" 
+          class="lightwidget-widget">
+        </iframe>
+      </div>
     </div>
-      <div class="side-panel-wrapper">
-    <div class="side-panel">
-      <img src="images/CSLOGO.png" alt="Crime Stoppers Logo" style="max-width: 80%; height: auto;" />
 
-<div style="margin-top: 3rem; display: flex; flex-direction: column; align-items: center;">
-  <h2 style="color: red; margin: 0 0 0.25rem 0;">50/50 JACKPOT:</h2>
-  <div id="jackpot" class="jackpot" style="margin: 0 0 0.25rem 0;">Loading...</div>
-  <p style="color: red; margin: 0;">Winner takes 50% – Buy your ticket now!</p>
-  <img src="images/QRCODE1.png" alt="QR Code" style="width: 150px; height: auto; margin-top: 1rem;" />
-</div>
+    <div class="side-panel-wrapper">
+      <div class="side-panel">
+        <img src="images/CSLOGO.png" alt="Crime Stoppers Logo" style="max-width: 80%; height: auto;" />
+        <div style="margin-top: 3rem; display: flex; flex-direction: column; align-items: center;">
+          <h2 style="color: red; margin: 0 0 0.25rem 0;">50/50 JACKPOT:</h2>
+          <div id="jackpot" class="jackpot" style="margin: 0 0 0.25rem 0;">Loading...</div>
+          <p style="color: red; margin: 0;">Winner takes 50% – Buy your ticket now!</p>
+          <img src="images/QRCODE1.png" alt="QR Code" style="width: 150px; height: auto; margin-top: 1rem;" />
+        </div>
+      </div>
     </div>
   </div>
 
@@ -146,7 +155,7 @@
         <img src="images/2.png" alt="Logo 2" />
         <img src="images/4.png" alt="Logo 4" />
         <img src="images/5.png" alt="Logo 5" />
-        <!-- Repeating logos to loop endlessly -->
+        <!-- Repeat for seamless scroll -->
         <img src="images/1.png" alt="Logo 1" />
         <img src="images/2.png" alt="Logo 2" />
         <img src="images/4.png" alt="Logo 4" />
@@ -155,30 +164,24 @@
     </div>
   </div>
 
-<script>
-  async function updateJackpot() {
-    try {
-      const res = await fetch('https://apic.rafflebox.ca/event-service/v2/events/niagara-jackfish');
-      const data = await res.json();
+  <script>
+    async function updateJackpot() {
+      try {
+        const res = await fetch('https://apic.rafflebox.ca/event-service/v2/events/niagara-jackfish');
+        const data = await res.json();
+        const jackpot = data?.data?.data?.displayJackpotDollars;
 
-      console.log("Full API response:", data);
-
-      // ✅ Correctly access jackpot from the nested object
-      const jackpot = data?.data?.data?.displayJackpotDollars;
-
-      console.log("Fetched Jackpot Value:", jackpot);
-
-      document.getElementById('jackpot').textContent = jackpot && jackpot > 0
-        ? `$${Number(jackpot).toLocaleString()}`
-        : '$0';
-    } catch (err) {
-      console.error('Error fetching jackpot:', err);
-      document.getElementById('jackpot').textContent = 'Unavailable';
+        document.getElementById('jackpot').textContent = jackpot && jackpot > 0
+          ? `$${Number(jackpot).toLocaleString()}`
+          : '$0';
+      } catch (err) {
+        console.error('Error fetching jackpot:', err);
+        document.getElementById('jackpot').textContent = 'Unavailable';
+      }
     }
-  }
 
-  updateJackpot();
-  setInterval(updateJackpot, 15000);
-</script>
+    updateJackpot();
+    setInterval(updateJackpot, 15000);
+  </script>
 </body>
 </html>
