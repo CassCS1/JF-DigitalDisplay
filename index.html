@@ -165,12 +165,14 @@
       const res = await fetch('https://apic.rafflebox.ca/event-service/v2/events/niagara-jackfish');
       const data = await res.json();
 
-      const jackpot = data?.data?.displayJackpotDollars;
+      // Dig into nested structure properly
+      const jackpot = data?.data?.data?.displayJackpotDollars;
       console.log("Jackpot from API:", jackpot);
 
-      document.getElementById('jackpot').textContent = jackpot != null && Number(jackpot) > 0
-        ? `$${Number(jackpot).toLocaleString()}`
-        : '$0';
+      document.getElementById('jackpot').textContent =
+        jackpot != null && Number(jackpot) > 0
+          ? `$${Number(jackpot).toLocaleString()}`
+          : '$0';
     } catch (err) {
       console.error('Error fetching jackpot:', err);
       document.getElementById('jackpot').textContent = 'Unavailable';
