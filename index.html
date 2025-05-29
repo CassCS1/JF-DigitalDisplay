@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crime Stoppers 50/50 Display</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #004C77;
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+   .container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  align-items: flex-start; /* keep things aligned to top */
+}
+
+    .video-section {
+      flex: 3;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+  .event-image {
+    width: 25%;
+    height: 700px;
+    object-fit: cover;
+  }
+
+ .side-panel-wrapper {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: transparent; /* lets blue background show */
+}
+
+.side-panel {
+  width: 100%;
+  height: 700px; /* control height */
+  background-color: #B5B5B5;
+  color: #004C77;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  justify-content: flex-start;
+  gap: 1rem;
+  box-sizing: border-box;
+}
+
+
+    .jackpot {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+
+    .bottom-section {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background-color: #004C77;
+      text-align: center;
+    }
+
+    .bottom-title {
+      font-size: 3.5rem;
+      color: #B5B5B5;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .ticker {
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 1rem 0;
+    }
+
+    .ticker-content {
+      display: inline-block;
+      animation: scroll 60s linear infinite;
+    }
+
+    .ticker-content img {
+      height: 100px;
+      margin: 0 1.5rem;
+      vertical-align: middle;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="video-section">
+      <img src="images/JF-Promo5.jpg" alt="Jackfish Promo" class="event-image" />
+      <img src="images/video-placeholder2.jpg" alt="Event Image 2" style="max-width: 100%; max-height: 100%; width: 75%;" />
+    </div>
+      <div class="side-panel-wrapper">
+    <div class="side-panel">
+      <img src="images/CSLOGO.png" alt="Crime Stoppers Logo" style="max-width: 80%; height: auto;" />
+
+<div style="margin-top: 3rem; display: flex; flex-direction: column; align-items: center;">
+  <h2 style="color: red; margin: 0 0 0.25rem 0;">50/50 JACKPOT:</h2>
+  <div id="jackpot" class="jackpot" style="margin: 0 0 0.25rem 0;">Loading...</div>
+  <p style="color: red; margin: 0;">Winner takes 50% – Buy your ticket now!</p>
+  <img src="images/QRCODE1.png" alt="QR Code" style="width: 150px; height: auto; margin-top: 1rem;" />
+</div>
+    </div>
+  </div>
+
+  <div class="bottom-section">
+    <div class="bottom-title">Local Businesses Supporting Local Safety</div>
+    <div class="ticker">
+      <div class="ticker-content">
+        <img src="images/1.png" alt="Logo 1" />
+        <img src="images/2.png" alt="Logo 2" />
+        <img src="images/3.svg" alt="Logo 3" />
+        <img src="images/4.png" alt="Logo 4" />
+        <img src="images/5.png" alt="Logo 5" />
+        <img src="images/6.png" alt="Logo 6" />
+        <!-- Repeating logos to loop endlessly -->
+        <img src="images/1.png" alt="Logo 1" />
+        <img src="images/2.png" alt="Logo 2" />
+        <img src="images/3.png" alt="Logo 3" />
+        <img src="images/4.png" alt="Logo 4" />
+        <img src="images/5.png" alt="Logo 5" />
+        <img src="images/6.png" alt="Logo 6" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function updateJackpot() {
+      try {
+        const res = await fetch('https://apic.rafflebox.ca/event-service/v2/events/niagara-jackfish');
+        const data = await res.json();
+        const jackpot = data?.event?.currentAmount;
+        document.getElementById('jackpot').textContent = jackpot ? `$${Number(jackpot).toLocaleString()}` : 'Unavailable';
+      } catch (err) {
+        document.getElementById('jackpot').textContent = 'Unavailable';
+      }
+    }
+
+    updateJackpot();
+    setInterval(updateJackpot, 15000); // refresh every 15 seconds
+  </script>
+</body>
+</html>
