@@ -160,23 +160,23 @@
   </div>
 
   <script>
-    async function updateJackpot() {
-      try {
-        const res = await fetch('https://apic.rafflebox.ca/event-service/v2/events/niagara-jackfish');
-        const data = await res.json();
-        const jackpot = data?.data?.data?.displayJackpotDollars;
+  async function updateJackpot() {
+    try {
+      const res = await fetch('https://apic.rafflebox.ca/event-service/v2/events/niagara-jackfish');
+      const data = await res.json();
+      const jackpot = data?.data?.jackpot;
 
-        document.getElementById('jackpot').textContent = jackpot && jackpot > 0
-          ? $${Number(jackpot).toLocaleString()}
-          : '$0';
-      } catch (err) {
-        console.error('Error fetching jackpot:', err);
-        document.getElementById('jackpot').textContent = 'Unavailable';
-      }
+      document.getElementById('jackpot').textContent = jackpot && jackpot > 0
+        ? `$${Number(jackpot).toLocaleString()}`
+        : '$0';
+    } catch (err) {
+      console.error('Error fetching jackpot:', err);
+      document.getElementById('jackpot').textContent = 'Unavailable';
     }
+  }
 
-    updateJackpot();
-    setInterval(updateJackpot, 15000);
-  </script>
+  updateJackpot();
+  setInterval(updateJackpot, 15000);
+</script>
 </body>
 </html>
