@@ -164,7 +164,7 @@
     try {
       const res = await fetch('https://apic.rafflebox.ca/event-service/v2/events/niagara-jackfish');
       const data = await res.json();
-      const jackpot = data?.data?.jackpot;
+      const jackpot = data?.data?.displayJackpotDollars;
 
       document.getElementById('jackpot').textContent = jackpot && jackpot > 0
         ? `$${Number(jackpot).toLocaleString()}`
