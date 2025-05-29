@@ -125,17 +125,13 @@
       <div class="ticker-content">
         <img src="images/1.png" alt="Logo 1" />
         <img src="images/2.png" alt="Logo 2" />
-        <img src="images/3.svg" alt="Logo 3" />
         <img src="images/4.png" alt="Logo 4" />
         <img src="images/5.png" alt="Logo 5" />
-        <img src="images/6.png" alt="Logo 6" />
         <!-- Repeating logos to loop endlessly -->
         <img src="images/1.png" alt="Logo 1" />
         <img src="images/2.png" alt="Logo 2" />
-        <img src="images/3.png" alt="Logo 3" />
         <img src="images/4.png" alt="Logo 4" />
         <img src="images/5.png" alt="Logo 5" />
-        <img src="images/6.png" alt="Logo 6" />
       </div>
     </div>
   </div>
@@ -145,13 +141,17 @@
     try {
       const res = await fetch('https://apic.rafflebox.ca/event-service/v2/events/niagara-jackfish');
       const data = await res.json();
-      const jackpot = data?.data?.event?.currentAmount;
+
+      console.log("Full API response:", data);
+
+      // ✅ Correctly access jackpot from the nested object
+      const jackpot = data?.data?.data?.displayJackpotDollars;
 
       console.log("Fetched Jackpot Value:", jackpot);
 
-      document.getElementById('jackpot').textContent = jackpot
+      document.getElementById('jackpot').textContent = jackpot && jackpot > 0
         ? `$${Number(jackpot).toLocaleString()}`
-        : 'Unavailable';
+        : '$0';
     } catch (err) {
       console.error('Error fetching jackpot:', err);
       document.getElementById('jackpot').textContent = 'Unavailable';
