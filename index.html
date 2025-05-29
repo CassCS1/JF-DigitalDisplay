@@ -13,7 +13,7 @@
       overflow: hidden;
     }
 
-   .container {
+ .container {
   display: flex;
   height: calc(100vh - 140px); /* Adjust if your ticker is taller */
   width: 100vw;
@@ -167,7 +167,7 @@
         const jackpot = data?.data?.data?.displayJackpotDollars;
 
         document.getElementById('jackpot').textContent = jackpot && jackpot > 0
-          ? `$${Number(jackpot).toLocaleString()}`
+          ? $${Number(jackpot).toLocaleString()}
           : '$0';
       } catch (err) {
         console.error('Error fetching jackpot:', err);
