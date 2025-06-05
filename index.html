@@ -5,75 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Crime Stoppers 50/50 Display</title>
   <style>
+    /* ===========================
+          Global / Body
+    =========================== */
     body {
       margin: 0;
       background-color: #004C77;
       font-family: Arial, sans-serif;
       color: white;
-      overflow: hidden;
+      height: 100vh;
+      overflow: hidden; /* Prevent scrollbars */
     }
 
- .container {
-  display: flex;
-  height: calc(100vh - 140px); /* Adjust if your ticker is taller */
-  width: 100vw;
-}
+    /* ===========================
+        1. MAIN CONTAINER
+        (top area for promo + IG + jackpot)
+        Leaves 140px at bottom for ticker
+    =========================== */
+    .container {
+      display: flex;
+      width: 100vw;
+      height: calc(100vh - 140px);
+    }
 
+    /* ===========================
+        2. LEFT SECTION (Promo + IG)
+         - Splits into 30% image, 70% widget
+    =========================== */
     .video-section {
-  flex: 3;
-  display: flex;
-  height: 100%;
-}
+      flex: 3;           /* 3 parts out of total 4 (75% width) */
+      display: flex;
+      height: 100%;
+    }
 
-   .event-image {
-  width: 25%;
-  height: 100%;
-  object-fit: cover;
-}
+    /* 2a. Promo image (leftmost 30%) */
+    .event-image {
+      width: 30%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-   .insta-widget-wrapper {
-  width: 75%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    /* 2b. Instagram widget wrapper (remaining 70%) */
+    .insta-widget-wrapper {
+      width: 70%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start; /* push widget up instead of centering */
+      padding-top: 1rem;       /* a little breathing room at top */
+      box-sizing: border-box;
+    }
 
-.lightwidget-widget {
-  width: 550px;
-  height: 90%;
-  max-height: 550px;
-  border: 0;
-  overflow: hidden;
-  border-radius: 4px;
-}
+    /* The LightWidget iframe itself */
+    .lightwidget-widget {
+      width: 95%;
+      height: 95%;
+      max-height: 580px; /* ensures it never exceeds parent's height */
+      border: 0;
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
 
+    /* ===========================
+        3. RIGHT SECTION (Jackpot Panel)
+        - Always the same height as .video-section
+        - Gray background extends to top
+    =========================== */
     .side-panel-wrapper {
-  width: 25%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
+      width: 25%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start; /* push the panel to top */
+      box-sizing: border-box;
+    }
 
-.side-panel {
-  width: 100%;
-  height: 100%;
-  max-height: 550px;
-  background-color: #B5B5B5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
-  box-sizing: border-box;
-}
+    .side-panel {
+      width: 100%;
+      height: 95%;
+      max-height: 580px; /* match IG widget max-height for consistency */
+      background-color: #B5B5B5;
+      color: #004C77;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      box-sizing: border-box;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
 
     .jackpot {
       font-size: 3rem;
       font-weight: bold;
       margin-top: 1rem;
+      color: #004C77;
     }
 
+    /* ===========================
+        4. BOTTOM SECTION (Ticker + Title)
+        - Pinned to bottom
+    =========================== */
     .bottom-section {
       position: absolute;
       bottom: 0;
@@ -107,50 +140,79 @@
     }
 
     @keyframes scroll {
-      0% { transform: translateX(0); }
+      0%   { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
   </style>
 </head>
+
 <body>
+  <!-- =========================
+       TOP CONTAINER:
+       Promo Image | Instagram | Jackpot Panel
+  ========================= -->
   <div class="container">
+    <!-- ==== LEFT: Promo + IG ==== -->
     <div class="video-section">
-      <img src="images/JF-Promo5.jpg" alt="Jackfish Promo" class="event-image" />
-      
-      <!-- LightWidget Instagram Feed -->
+      <!-- Promo Image (30%) -->
+      <img
+        src="images/JF-Promo5.jpg"
+        alt="Jackfish Promo"
+        class="event-image"
+      />
+
+      <!-- Instagram widget (70%) -->
       <div class="insta-widget-wrapper">
         <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
-        <iframe 
-          src="https://cdn.lightwidget.com/widgets/c36c449fd293599688ada4b153a2eb9a.html" 
-          scrolling="no" 
-          allowtransparency="true" 
+        <iframe
+          src="https://cdn.lightwidget.com/widgets/c36c449fd293599688ada4b153a2eb9a.html"
+          scrolling="no"
+          allowtransparency="true"
           class="lightwidget-widget">
         </iframe>
       </div>
     </div>
 
+    <!-- ==== RIGHT: 50/50 Jackpot Panel ==== -->
     <div class="side-panel-wrapper">
       <div class="side-panel">
-        <img src="images/CSLOGO.png" alt="Crime Stoppers Logo" style="max-width: 80%; height: auto;" />
+        <!-- Crime Stoppers Logo -->
+        <img
+          src="images/CSLOGO.png"
+          alt="Crime Stoppers Logo"
+          style="max-width: 80%; height: auto;"
+        />
+
+        <!-- Jackpot Text + QR Code -->
         <div style="margin-top: 3rem; display: flex; flex-direction: column; align-items: center;">
           <h2 style="color: red; margin: 0 0 0.25rem 0;">50/50 JACKPOT:</h2>
           <div id="jackpot" class="jackpot" style="margin: 0 0 0.25rem 0;">Loading...</div>
           <p style="color: red; margin: 0;">Winner takes 50% – Buy your ticket now!</p>
-          <img src="images/QRCODE1.png" alt="QR Code" style="width: 150px; height: auto; margin-top: 1rem;" />
+          <img
+            src="images/QRCODE1.png"
+            alt="QR Code"
+            style="width: 150px; height: auto; margin-top: 1rem;"
+          />
         </div>
       </div>
     </div>
   </div>
 
+  <!-- =========================
+       BOTTOM SECTION:
+       Title + Scrolling Logos
+  ========================= -->
   <div class="bottom-section">
-    <div class="bottom-title">Local Businesses Supporting Local Safety</div>
+    <div class="bottom-title">
+      Local Businesses Supporting Local Safety
+    </div>
     <div class="ticker">
       <div class="ticker-content">
         <img src="images/1.png" alt="Logo 1" />
         <img src="images/2.png" alt="Logo 2" />
         <img src="images/4.png" alt="Logo 4" />
         <img src="images/5.png" alt="Logo 5" />
-        <!-- Repeat for seamless scroll -->
+        <!-- Repeat for seamless loop -->
         <img src="images/1.png" alt="Logo 1" />
         <img src="images/2.png" alt="Logo 2" />
         <img src="images/4.png" alt="Logo 4" />
@@ -159,28 +221,34 @@
     </div>
   </div>
 
+  <!-- =========================
+       JavaScript: Fetch Live 50/50 Jackpot
+  ========================= -->
   <script>
-  async function updateJackpot() {
-    try {
-      const res = await fetch('https://apic.rafflebox.ca/event-service/v2/events/niagara-jackfish');
-      const data = await res.json();
+    async function updateJackpot() {
+      try {
+        const res = await fetch(
+          'https://apic.rafflebox.ca/event-service/v2/events/niagara-jackfish'
+        );
+        const data = await res.json();
 
-      // Dig into nested structure properly
-      const jackpot = data?.data?.data?.displayJackpotDollars;
-      console.log("Jackpot from API:", jackpot);
+        // Correctly dive into the triple-nested "data" object:
+        const jackpot = data?.data?.data?.displayJackpotDollars;
+        console.log('Fetched Jackpot Value:', jackpot);
 
-      document.getElementById('jackpot').textContent =
-        jackpot != null && Number(jackpot) > 0
-          ? `$${Number(jackpot).toLocaleString()}`
-          : '$0';
-    } catch (err) {
-      console.error('Error fetching jackpot:', err);
-      document.getElementById('jackpot').textContent = 'Unavailable';
+        document.getElementById('jackpot').textContent =
+          jackpot != null && Number(jackpot) > 0
+            ? `$${Number(jackpot).toLocaleString()}`
+            : '$0';
+      } catch (err) {
+        console.error('Error fetching jackpot:', err);
+        document.getElementById('jackpot').textContent = 'Unavailable';
+      }
     }
-  }
 
-  updateJackpot();
-  setInterval(updateJackpot, 15000);
-</script>
+    // Initial fetch + refresh every 15 seconds
+    updateJackpot();
+    setInterval(updateJackpot, 15000);
+  </script>
 </body>
 </html>
