@@ -48,17 +48,16 @@
 
     /* 2b. Instagram widget wrapper (remaining 70%) */
     .insta-widget-wrapper {
-      width: 70%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start; /* push widget up instead of centering */
-      padding-top: 1rem;       /* a little breathing room at top */
-      box-sizing: border-box;
-    }
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 1rem;
+  box-sizing: border-box;
+}
 
-    /* The LightWidget iframe itself */
-    .lightwidget-widget {
+.lightwidget-widget {
   width: 95%;
   height: 100%;
   border: 0;
@@ -160,17 +159,17 @@
         class="event-image"
       />
 
-      <!-- Instagram widget (70%) -->
-      <div class="insta-widget-wrapper">
-        <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
-        <iframe
-          src="https://cdn.lightwidget.com/widgets/c36c449fd293599688ada4b153a2eb9a.html"
-          scrolling="no"
-          allowtransparency="true"
-          class="lightwidget-widget">
-        </iframe>
-      </div>
-    </div>
+     <!-- Instagram widget (70%) -->
+<div class="insta-widget-wrapper">
+  <!-- LightWidget WIDGET -->
+  <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+  <iframe
+    src="https://cdn.lightwidget.com/widgets/c36c449fd293599688ada4b153a2eb9a.html"
+    scrolling="no"
+    allowtransparency="true"
+    class="lightwidget-widget">
+  </iframe>
+</div>
 
     <!-- ==== RIGHT: 50/50 Jackpot Panel ==== -->
     <div class="side-panel-wrapper">
